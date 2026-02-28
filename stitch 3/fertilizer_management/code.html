@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1c5f21",
+                        "soil": "#8D6E63",
+                        "warning": "#E53935",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#131f14",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<title>Plentica - Fertilizer Management</title>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-10 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-primary">
+<div class="size-8 flex items-center justify-center bg-primary rounded-lg text-white">
+<span class="material-symbols-outlined">agriculture</span>
+</div>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-tight uppercase">PLENTICA</h2>
+</div>
+<nav class="flex items-center gap-6">
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Dashboard</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Inventory</a>
+<a class="text-slate-900 dark:text-white border-b-2 border-primary text-sm font-semibold py-1" href="#">Fertilizer</a>
+</nav>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<label class="flex flex-col min-w-40 h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full bg-slate-100 dark:bg-slate-800">
+<div class="text-slate-500 flex items-center justify-center pl-4">
+<span class="material-symbols-outlined text-xl">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 border-none bg-transparent focus:ring-0 text-sm placeholder:text-slate-500" placeholder="Search crops or batches" value=""/>
+</div>
+</label>
+<div class="flex gap-2">
+<button class="flex items-center justify-center rounded-lg size-10 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 transition-colors">
+<span class="material-symbols-outlined text-xl">notifications</span>
+</button>
+<button class="flex items-center justify-center rounded-lg size-10 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 transition-colors">
+<span class="material-symbols-outlined text-xl">settings</span>
+</button>
+</div>
+<div class="bg-primary/20 rounded-full size-10 flex items-center justify-center border-2 border-primary overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="User profile avatar photo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3XNX6FmdPh1P0GPQMIgC-0608g3B032q9cG6avFXmcvDcKfaP1vxCNi4nC3l39Jboq5zj9U9kX4nBZiE4ljnqnhO9kkbQsXfG38tQJw0tmYeMu8IuvWSLNpTjE540hdRXh2dYXZ2t67WzafiE7EpqzOL__qVS4qP7N-7xoB7NJpt7JvH1n9akz4cVNDe_5GbDoEL1trEIfxrvErjz-yp7Je7_TWysMAzD8SVefr6KMJgPADUt7kMdW0IbEyduKUnmNkJRRIm5BPU"/>
+</div>
+</div>
+</header>
+<div class="flex flex-1">
+<!-- Sidebar -->
+<aside class="w-64 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 hidden lg:flex flex-col gap-8">
+<div class="flex flex-col gap-2">
+<p class="px-3 text-xs font-bold text-slate-400 uppercase tracking-widest">Main Menu</p>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium">Overview</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg" href="#">
+<span class="material-symbols-outlined">science</span>
+<span class="text-sm font-medium">Soil Analysis</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 bg-primary/10 text-primary rounded-lg" href="#">
+<span class="material-symbols-outlined font-fill">potted_plant</span>
+<span class="text-sm font-bold">Fertilizer Mgmt</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="text-sm font-medium">Crop Planning</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg" href="#">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="text-sm font-medium">Budget Tracking</span>
+</a>
+</div>
+<div class="mt-auto p-4 bg-soil/10 rounded-xl border border-soil/20">
+<div class="flex items-center gap-2 text-soil mb-2">
+<span class="material-symbols-outlined text-lg">info</span>
+<p class="text-xs font-bold uppercase">Soil Health Tip</p>
+</div>
+<p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">Consider nitrogen-fixing cover crops for Block B to reduce synthetic N usage next season.</p>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 overflow-y-auto bg-slate-50/50 dark:bg-slate-950/50 p-8">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+<div>
+<h1 class="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Fertilizer Management</h1>
+<p class="text-slate-500 dark:text-slate-400 mt-1">Optimize nutrient distribution and monitor economic efficiency.</p>
+</div>
+<button class="flex items-center gap-2 bg-primary text-white px-6 py-2.5 rounded-lg font-bold shadow-lg shadow-primary/20 hover:brightness-110 transition-all">
+<span class="material-symbols-outlined">add</span>
+                            New Application
+                        </button>
+</div>
+<!-- Summary Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-primary/10 rounded-lg text-primary">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<span class="text-primary text-xs font-bold bg-primary/10 px-2 py-1 rounded">+5.2% vs target</span>
+</div>
+<p class="text-slate-500 text-sm font-medium">Total Budget Impact</p>
+<h3 class="text-3xl font-black text-slate-900 dark:text-white mt-1">$12,450.00</h3>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm border-l-4 border-l-warning">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-warning/10 rounded-lg text-warning">
+<span class="material-symbols-outlined">report_problem</span>
+</div>
+<span class="text-warning text-xs font-bold bg-warning/10 px-2 py-1 rounded">Action Required</span>
+</div>
+<p class="text-slate-500 text-sm font-medium">Active Over-applications</p>
+<h3 class="text-3xl font-black text-slate-900 dark:text-white mt-1">4 Batches</h3>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-soil/10 rounded-lg text-soil">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+<span class="text-slate-400 text-xs font-bold">Stable</span>
+</div>
+<p class="text-slate-500 text-sm font-medium">Avg. NPK Balance Index</p>
+<h3 class="text-3xl font-black text-slate-900 dark:text-white mt-1">92.4</h3>
+</div>
+</div>
+<!-- Hybrid Table Section -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+<div class="p-6 border-b border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between gap-4">
+<h2 class="text-lg font-bold">Crop Nutrient Tracking</h2>
+<div class="flex gap-2">
+<button class="px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 text-sm font-medium hover:bg-slate-50">Export PDF</button>
+<button class="px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 text-sm font-medium hover:bg-slate-50">Filters</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50 dark:bg-slate-800/50">
+<th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Crop</th>
+<th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">NPK Ratio</th>
+<th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Nutrient Balance</th>
+<th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Application Date</th>
+<th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Quantity</th>
+<th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Cost Impact</th>
+<th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-200 dark:divide-slate-800">
+<!-- Row 1 -->
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/20 transition-colors">
+<td class="px-6 py-5 font-bold text-slate-900 dark:text-white">Sweet Corn (Block A)</td>
+<td class="px-6 py-5 font-mono text-soil font-semibold">10-10-10</td>
+<td class="px-6 py-5 min-w-[180px]">
+<div class="flex items-center gap-3">
+<div class="flex-1 h-2 bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 85%;"></div>
+</div>
+<span class="text-sm font-bold w-8 text-right">85%</span>
+</div>
+</td>
+<td class="px-6 py-5 text-sm text-slate-600 dark:text-slate-400">Oct 12, 2023</td>
+<td class="px-6 py-5 text-sm font-medium">500 kg</td>
+<td class="px-6 py-5 text-sm font-bold text-slate-900 dark:text-white">$1,200</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-primary/10 text-primary">Optimal</span>
+</td>
+</tr>
+<!-- Row 2 (Warning) -->
+<tr class="bg-warning/5 hover:bg-warning/[0.08] transition-colors">
+<td class="px-6 py-5 font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                                            Winter Wheat
+                                            <span class="material-symbols-outlined text-warning text-lg">error</span>
+</td>
+<td class="px-6 py-5 font-mono text-soil font-semibold">20-10-5</td>
+<td class="px-6 py-5 min-w-[180px]">
+<div class="flex items-center gap-3">
+<div class="flex-1 h-2 bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+<div class="h-full bg-warning rounded-full" style="width: 115%;"></div>
+</div>
+<span class="text-sm font-bold w-8 text-right text-warning">115%</span>
+</div>
+</td>
+<td class="px-6 py-5 text-sm text-slate-600 dark:text-slate-400">Oct 15, 2023</td>
+<td class="px-6 py-5 text-sm font-medium">800 kg</td>
+<td class="px-6 py-5 text-sm font-bold text-slate-900 dark:text-white">$2,500</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-warning/10 text-warning uppercase">Over-applied</span>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/20 transition-colors">
+<td class="px-6 py-5 font-bold text-slate-900 dark:text-white">Soybeans (East)</td>
+<td class="px-6 py-5 font-mono text-soil font-semibold">5-15-15</td>
+<td class="px-6 py-5 min-w-[180px]">
+<div class="flex items-center gap-3">
+<div class="flex-1 h-2 bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 95%;"></div>
+</div>
+<span class="text-sm font-bold w-8 text-right">95%</span>
+</div>
+</td>
+<td class="px-6 py-5 text-sm text-slate-600 dark:text-slate-400">Oct 18, 2023</td>
+<td class="px-6 py-5 text-sm font-medium">300 kg</td>
+<td class="px-6 py-5 text-sm font-bold text-slate-900 dark:text-white">$900</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-primary/10 text-primary">Optimal</span>
+</td>
+</tr>
+<!-- Row 4 (Deficiency Warning) -->
+<tr class="bg-soil/5 hover:bg-soil/[0.08] transition-colors">
+<td class="px-6 py-5 font-bold text-slate-900 dark:text-white">Upland Rice</td>
+<td class="px-6 py-5 font-mono text-soil font-semibold">15-15-15</td>
+<td class="px-6 py-5 min-w-[180px]">
+<div class="flex items-center gap-3">
+<div class="flex-1 h-2 bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+<div class="h-full bg-soil rounded-full" style="width: 30%;"></div>
+</div>
+<span class="text-sm font-bold w-8 text-right text-soil">30%</span>
+</div>
+</td>
+<td class="px-6 py-5 text-sm text-slate-600 dark:text-slate-400">Oct 20, 2023</td>
+<td class="px-6 py-5 text-sm font-medium">1,200 kg</td>
+<td class="px-6 py-5 text-sm font-bold text-slate-900 dark:text-white">$4,100</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-soil/20 text-soil uppercase">Deficient</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 bg-slate-50 dark:bg-slate-800/30 flex items-center justify-between text-sm text-slate-500">
+<span>Showing 1-4 of 28 crops</span>
+<div class="flex gap-1">
+<button class="size-8 flex items-center justify-center rounded border border-slate-200 bg-white hover:bg-slate-50"><span class="material-symbols-outlined text-sm">chevron_left</span></button>
+<button class="size-8 flex items-center justify-center rounded border border-primary bg-primary text-white font-bold">1</button>
+<button class="size-8 flex items-center justify-center rounded border border-slate-200 bg-white hover:bg-slate-50">2</button>
+<button class="size-8 flex items-center justify-center rounded border border-slate-200 bg-white hover:bg-slate-50">3</button>
+<button class="size-8 flex items-center justify-center rounded border border-slate-200 bg-white hover:bg-slate-50"><span class="material-symbols-outlined text-sm">chevron_right</span></button>
+</div>
+</div>
+</div>
+<!-- Bottom Analysis Widgets -->
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-8 mt-8">
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<h3 class="font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">monitoring</span>
+                                Nitrogen Distribution Trend
+                            </h3>
+<div class="h-48 w-full bg-slate-50 dark:bg-slate-800/50 rounded flex items-end justify-between px-4 py-2 gap-2 relative overflow-hidden">
+<!-- Mock Graph Bars -->
+<div class="w-full h-24 bg-primary/20 rounded-t relative group">
+<div class="absolute bottom-0 w-full bg-primary rounded-t" style="height: 60%;"></div>
+</div>
+<div class="w-full h-32 bg-primary/20 rounded-t relative">
+<div class="absolute bottom-0 w-full bg-primary rounded-t" style="height: 80%;"></div>
+</div>
+<div class="w-full h-20 bg-primary/20 rounded-t relative">
+<div class="absolute bottom-0 w-full bg-primary rounded-t" style="height: 40%;"></div>
+</div>
+<div class="w-full h-40 bg-warning/20 rounded-t relative">
+<div class="absolute bottom-0 w-full bg-warning rounded-t" style="height: 100%;"></div>
+</div>
+<div class="w-full h-28 bg-primary/20 rounded-t relative">
+<div class="absolute bottom-0 w-full bg-primary rounded-t" style="height: 70%;"></div>
+</div>
+<div class="w-full h-36 bg-primary/20 rounded-t relative">
+<div class="absolute bottom-0 w-full bg-primary rounded-t" style="height: 85%;"></div>
+</div>
+<div class="w-full h-24 bg-soil/20 rounded-t relative">
+<div class="absolute bottom-0 w-full bg-soil rounded-t" style="height: 30%;"></div>
+</div>
+</div>
+<div class="flex justify-between mt-2 text-[10px] font-bold text-slate-400 uppercase tracking-tighter">
+<span>Batch 101</span>
+<span>Batch 102</span>
+<span>Batch 103</span>
+<span class="text-warning">Batch 104</span>
+<span>Batch 105</span>
+<span>Batch 106</span>
+<span class="text-soil">Batch 107</span>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<h3 class="font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-soil">inventory_2</span>
+                                Recommended Nutrient Mixes
+                            </h3>
+<div class="space-y-3">
+<div class="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-800/50 rounded-lg">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded bg-white dark:bg-slate-900 flex items-center justify-center font-bold text-soil border border-slate-200 dark:border-slate-700">A1</div>
+<div>
+<p class="text-sm font-bold">Custom Organic Blend</p>
+<p class="text-xs text-slate-500">For Nitrogen-poor soils</p>
+</div>
+</div>
+<span class="text-xs font-bold text-primary">In Stock</span>
+</div>
+<div class="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-800/50 rounded-lg">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded bg-white dark:bg-slate-900 flex items-center justify-center font-bold text-soil border border-slate-200 dark:border-slate-700">K2</div>
+<div>
+<p class="text-sm font-bold">Potassium Fortifier</p>
+<p class="text-xs text-slate-500">Late stage root support</p>
+</div>
+</div>
+<span class="text-xs font-bold text-warning">Low Stock</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</div>
+</body></html>

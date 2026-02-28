@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1c5f21",
+                        "accent-blue": "#4FC3F7",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#131f14",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; height: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
+        .gantt-grid { background-size: 40px 100%; background-image: linear-gradient(to right, #e2e8f0 1px, transparent 1px); }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="relative flex min-h-screen w-full flex-col">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-6 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-primary">
+<div class="size-8 flex items-center justify-center bg-primary rounded-lg text-white">
+<span class="material-symbols-outlined">water_drop</span>
+</div>
+<h2 class="text-xl font-extrabold tracking-tight">PLENTICA</h2>
+</div>
+<div class="hidden md:flex items-center bg-slate-100 dark:bg-slate-800 rounded-lg px-3 py-1.5 w-80">
+<span class="material-symbols-outlined text-slate-500 text-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-full placeholder:text-slate-500" placeholder="Search zones, sensors, or schedules..."/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-900"></span>
+</button>
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="h-8 w-[1px] bg-slate-200 dark:border-slate-700 mx-2"></div>
+<div class="flex items-center gap-3">
+<div class="text-right hidden sm:block">
+<p class="text-sm font-semibold">Alex Rivera</p>
+<p class="text-xs text-slate-500">System Admin</p>
+</div>
+<div class="size-10 rounded-full bg-primary/20 flex items-center justify-center overflow-hidden border-2 border-primary/10">
+<img alt="User profile" data-alt="Portrait of a male professional administrator" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrIUaovDGwWQrmKg3nsw0DGbV-Qh3UOEwR1XyYNZP0P5FO4UJ3l21L-yTRkcKFwzD9FGYhGWJ1xeV5qEr4BJqcLUUKEOcT8i58jx-k79Ey7aMXiiLvw2zC9flCiQ2fPn0kDdDyRk-cqDZck9c8Gwo2GHStaJOFZJPLiryG1a8QcKxbDZakJyuuLyVG31WUr_dm1Vo-QYcFRaS7Bm2GK4BtoYz3p8PhYkOx86CLPnFGpbT4FhwpEchqFw7lyDzg1hU_YN05Pnb9-y0"/>
+</div>
+</div>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<!-- Sidebar -->
+<aside class="w-64 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex flex-col p-4 gap-2 sticky top-16 h-[calc(100vh-64px)]">
+<p class="text-xs font-bold text-slate-400 uppercase tracking-widest px-3 mb-2">Main Menu</p>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 bg-primary/10 text-primary rounded-lg" href="#">
+<span class="material-symbols-outlined fill-1">calendar_today</span>
+<span class="text-sm font-bold">Irrigation Planning</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">query_stats</span>
+<span class="text-sm font-medium">Zone Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">inventory_2</span>
+<span class="text-sm font-medium">Resource Mgmt</span>
+</a>
+<div class="mt-auto border-t border-slate-100 dark:border-slate-800 pt-4 px-3">
+<div class="bg-primary/5 rounded-xl p-4 border border-primary/10">
+<div class="flex items-center justify-between mb-2">
+<span class="text-xs font-bold text-primary uppercase">Water Usage</span>
+<span class="text-xs font-bold text-primary">82%</span>
+</div>
+<div class="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 82%"></div>
+</div>
+<p class="text-[10px] text-slate-500 mt-2 leading-tight">Monthly allocation approaching limit.</p>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 overflow-y-auto bg-background-light dark:bg-background-dark p-6">
+<div class="max-w-7xl mx-auto space-y-6">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<h1 class="text-3xl font-black tracking-tight">Irrigation Planning</h1>
+<p class="text-slate-500">Configure water delivery logic and automated cycle schedules.</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined text-sm">download</span>
+                                Export Report
+                            </button>
+<button class="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-sm">add</span>
+                                Create Schedule
+                            </button>
+</div>
+</div>
+<!-- Horizontal Timeline Summary -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
+<div class="p-4 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">schedule</span>
+<h3 class="font-bold">Daily Timeline Preview</h3>
+</div>
+<div class="flex items-center gap-4 text-xs">
+<div class="flex items-center gap-1.5"><span class="size-2 rounded-full bg-accent-blue"></span> Active</div>
+<div class="flex items-center gap-1.5"><span class="size-2 rounded-full bg-amber-500"></span> Peak Usage</div>
+<div class="flex items-center gap-1.5"><span class="size-2 rounded-full bg-slate-300"></span> Idle</div>
+</div>
+</div>
+<div class="p-6">
+<div class="relative flex justify-between">
+<!-- Morning Cycle -->
+<div class="flex-1 border-t-2 border-primary/20 relative pt-6 text-center">
+<div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white dark:bg-slate-900 px-2">
+<span class="material-symbols-outlined text-primary text-base">sunny</span>
+</div>
+<p class="text-sm font-bold">Morning Cycle</p>
+<p class="text-xs text-slate-500">06:00 - 08:00</p>
+</div>
+<!-- Peak Window -->
+<div class="flex-1 border-t-2 border-amber-500 relative pt-6 text-center">
+<div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white dark:bg-slate-900 px-2">
+<span class="material-symbols-outlined text-amber-500 text-base">warning</span>
+</div>
+<div class="absolute top-0 left-0 right-0 h-1 bg-amber-500/10"></div>
+<p class="text-sm font-bold text-amber-700 dark:text-amber-500">Peak Demand</p>
+<p class="text-xs text-slate-500">11:00 - 14:00</p>
+</div>
+<!-- Soil Check -->
+<div class="flex-1 border-t-2 border-slate-200 relative pt-6 text-center">
+<div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white dark:bg-slate-900 px-2">
+<span class="material-symbols-outlined text-slate-400 text-base">thermostat</span>
+</div>
+<p class="text-sm font-bold">Soil Check</p>
+<p class="text-xs text-slate-500">16:00</p>
+</div>
+<!-- Evening Cycle -->
+<div class="flex-1 border-t-2 border-primary relative pt-6 text-center">
+<div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white dark:bg-slate-900 px-2">
+<span class="material-symbols-outlined text-primary text-base">bedtime</span>
+</div>
+<p class="text-sm font-bold">Evening Cycle</p>
+<p class="text-xs text-slate-500">19:00 - 21:00</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Calendar Strip -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-2 shadow-sm overflow-x-auto custom-scrollbar">
+<div class="flex items-center min-w-[1000px]">
+<button class="p-4 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<div class="flex flex-1 justify-around">
+<div class="flex flex-col items-center p-3 opacity-40">
+<span class="text-[10px] font-bold uppercase text-slate-400">Sun</span>
+<span class="text-lg font-bold">01</span>
+</div>
+<div class="flex flex-col items-center p-3 opacity-40">
+<span class="text-[10px] font-bold uppercase text-slate-400">Mon</span>
+<span class="text-lg font-bold">02</span>
+</div>
+<div class="flex flex-col items-center p-3 opacity-40">
+<span class="text-[10px] font-bold uppercase text-slate-400">Tue</span>
+<span class="text-lg font-bold">03</span>
+</div>
+<div class="flex flex-col items-center p-3 opacity-40">
+<span class="text-[10px] font-bold uppercase text-slate-400">Wed</span>
+<span class="text-lg font-bold">04</span>
+</div>
+<div class="flex flex-col items-center p-4 bg-primary text-white rounded-xl shadow-md transform scale-110">
+<span class="text-[10px] font-bold uppercase opacity-80">Thu</span>
+<span class="text-xl font-black">05</span>
+<div class="size-1.5 bg-accent-blue rounded-full mt-1"></div>
+</div>
+<div class="flex flex-col items-center p-3">
+<span class="text-[10px] font-bold uppercase text-slate-400">Fri</span>
+<span class="text-lg font-bold">06</span>
+</div>
+<div class="flex flex-col items-center p-3">
+<span class="text-[10px] font-bold uppercase text-slate-400">Sat</span>
+<span class="text-lg font-bold">07</span>
+</div>
+<div class="flex flex-col items-center p-3">
+<span class="text-[10px] font-bold uppercase text-slate-400">Sun</span>
+<span class="text-lg font-bold">08</span>
+</div>
+<div class="flex flex-col items-center p-3">
+<span class="text-[10px] font-bold uppercase text-slate-400">Mon</span>
+<span class="text-lg font-bold">09</span>
+</div>
+<div class="flex flex-col items-center p-3">
+<span class="text-[10px] font-bold uppercase text-slate-400">Tue</span>
+<span class="text-lg font-bold">10</span>
+</div>
+<div class="flex flex-col items-center p-3">
+<span class="text-[10px] font-bold uppercase text-slate-400">Wed</span>
+<span class="text-lg font-bold">11</span>
+</div>
+</div>
+<button class="p-4 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Alerts -->
+<div class="bg-red-50 dark:bg-red-900/10 border border-red-200 dark:border-red-900/30 p-4 rounded-xl flex items-center gap-4">
+<div class="bg-red-100 dark:bg-red-900/20 p-2 rounded-lg text-red-600">
+<span class="material-symbols-outlined">error</span>
+</div>
+<div class="flex-1">
+<h4 class="text-sm font-bold text-red-800 dark:text-red-400">Low Water Pressure Warning</h4>
+<p class="text-xs text-red-700 dark:text-red-400/80">Zone 4: Orchard West is reporting 15% lower pressure than threshold. Automated rescheduling suggested.</p>
+</div>
+<button class="bg-red-600 text-white px-3 py-1.5 rounded text-xs font-bold hover:bg-red-700 transition-colors">Resolve Now</button>
+</div>
+<!-- Gantt Style Schedule -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+<div class="p-4 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between bg-slate-50/50 dark:bg-slate-800/50">
+<h3 class="font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">bar_chart</span>
+                                Allocation Schedule (Hourly)
+                            </h3>
+<div class="flex items-center gap-2">
+<span class="text-xs font-medium text-slate-500">Scale: 1 Hour</span>
+</div>
+</div>
+<div class="overflow-x-auto custom-scrollbar">
+<div class="min-w-[960px]">
+<!-- Gantt Header -->
+<div class="grid grid-cols-[160px_repeat(24,1fr)] border-b border-slate-100 dark:border-slate-800">
+<div class="p-3 border-r border-slate-100 dark:border-slate-800 text-xs font-bold uppercase text-slate-400">Zone Name</div>
+<div class="col-span-24 grid grid-cols-24">
+<div class="text-[10px] text-center py-2 border-r border-slate-100 dark:border-slate-800">00</div>
+<div class="text-[10px] text-center py-2 border-r border-slate-100 dark:border-slate-800">01</div>
+<div class="text-[10px] text-center py-2 border-r border-slate-100 dark:border-slate-800">02</div>
+<div class="text-[10px] text-center py-2 border-r border-slate-100 dark:border-slate-800">03</div>
+<div class="text-[10px] text-center py-2 border-r border-slate-100 dark:border-slate-800">04</div>
+<div class="text-[10px] text-center py-2 border-r border-slate-100 dark:border-slate-800">05</div>
+<div class="text-[10px] text-center py-2 border-r border-slate-100 dark:border-slate-800 bg-primary/5 font-bold">06</div>
+<div class="text-[10px] text-center py-2 border-r border-slate-100 dark:border-slate-800 bg-primary/5 font-bold">07</div>
+<div class="text-[10px] text-center py-2 border-r border-slate-100 dark:border-slate-800">08</div>
+<div class="text-[10px] text-center py-2 border-r border-slate-100 dark:border-slate-800">09</div>
+<div class="text-[10px] text-center py-2 border-r border-slate-100 dark:border-slate-800">10</div>
+<div class="text-[10px] text-center py-2 border-r border-slate-100 dark:border-slate-800 bg-amber-50">11</div>
+<div class="text-[10px] text-center py-2 border-r border-slate-100 dark:border-slate-800 bg-amber-50">12</div>
+<div class="text-[10px] text-center py-2 border-r border-slate-100 dark:border-slate-800 bg-amber-50">13</div>
+<div class="text-[10px] text-center py-2 border-r border-slate-100 dark:border-slate-800">14</div>
+<div class="text-[10px] text-center py-2 border-r border-slate-100 dark:border-slate-800">15</div>
+<div class="text-[10px] text-center py-2 border-r border-slate-100 dark:border-slate-800">16</div>
+<div class="text-[10px] text-center py-2 border-r border-slate-100 dark:border-slate-800">17</div>
+<div class="text-[10px] text-center py-2 border-r border-slate-100 dark:border-slate-800">18</div>
+<div class="text-[10px] text-center py-2 border-r border-slate-100 dark:border-slate-800 bg-primary/5 font-bold">19</div>
+<div class="text-[10px] text-center py-2 border-r border-slate-100 dark:border-slate-800 bg-primary/5 font-bold">20</div>
+<div class="text-[10px] text-center py-2 border-r border-slate-100 dark:border-slate-800 bg-primary/5 font-bold">21</div>
+<div class="text-[10px] text-center py-2 border-r border-slate-100 dark:border-slate-800">22</div>
+<div class="text-[10px] text-center py-2 border-r border-slate-100 dark:border-slate-800">23</div>
+</div>
+</div>
+<!-- Gantt Rows -->
+<!-- Zone 1 -->
+<div class="grid grid-cols-[160px_repeat(24,1fr)] border-b border-slate-50 dark:border-slate-800 h-16 gantt-grid">
+<div class="flex items-center px-4 border-r border-slate-100 dark:border-slate-800 bg-slate-50/30 dark:bg-slate-800/30">
+<span class="text-xs font-bold">Zone 1: North Hill</span>
+</div>
+<div class="col-span-24 relative flex items-center">
+<!-- Task Bar -->
+<div class="absolute left-[25%] w-[8.33%] h-8 bg-accent-blue rounded-lg shadow-sm flex items-center justify-center border-l-4 border-primary/40 group cursor-pointer hover:scale-105 transition-transform">
+<div class="absolute inset-0 bg-gradient-to-r from-accent-blue to-primary/30 opacity-50 rounded-lg"></div>
+<span class="text-[10px] font-bold text-slate-900 relative z-10 px-1 truncate">Irrig. 120m³</span>
+</div>
+<div class="absolute left-[79%] w-[12.5%] h-8 bg-accent-blue rounded-lg shadow-sm flex items-center justify-center border-l-4 border-primary/40 group cursor-pointer hover:scale-105 transition-transform">
+<div class="absolute inset-0 bg-gradient-to-r from-accent-blue to-primary/30 opacity-50 rounded-lg"></div>
+<span class="text-[10px] font-bold text-slate-900 relative z-10 px-1 truncate">Irrig. 150m³</span>
+</div>
+</div>
+</div>
+<!-- Zone 2 -->
+<div class="grid grid-cols-[160px_repeat(24,1fr)] border-b border-slate-50 dark:border-slate-800 h-16 gantt-grid">
+<div class="flex items-center px-4 border-r border-slate-100 dark:border-slate-800 bg-slate-50/30 dark:bg-slate-800/30">
+<span class="text-xs font-bold">Zone 2: Vineyard</span>
+</div>
+<div class="col-span-24 relative flex items-center">
+<div class="absolute left-[29.1%] w-[12.5%] h-8 bg-accent-blue/60 rounded-lg shadow-sm flex items-center justify-center border-l-4 border-primary/20 group cursor-pointer hover:scale-105 transition-transform">
+<span class="text-[10px] font-bold text-slate-900 relative z-10 px-1 truncate">Pulse Irrig.</span>
+</div>
+</div>
+</div>
+<!-- Zone 3 -->
+<div class="grid grid-cols-[160px_repeat(24,1fr)] border-b border-slate-50 dark:border-slate-800 h-16 gantt-grid">
+<div class="flex items-center px-4 border-r border-slate-100 dark:border-slate-800 bg-slate-50/30 dark:bg-slate-800/30">
+<span class="text-xs font-bold">Zone 3: Greenhouse</span>
+</div>
+<div class="col-span-24 relative flex items-center">
+<div class="absolute left-[0%] w-[100%] h-4 bg-primary/5 rounded-full border border-primary/10 flex items-center px-3">
+<span class="text-[8px] font-medium text-slate-400">Automated Humidity Maintenance Active</span>
+</div>
+<div class="absolute left-[8%] w-[4.16%] h-8 bg-accent-blue rounded-lg shadow-sm border-l-4 border-primary/40"></div>
+<div class="absolute left-[50%] w-[4.16%] h-8 bg-accent-blue rounded-lg shadow-sm border-l-4 border-primary/40"></div>
+<div class="absolute left-[83%] w-[4.16%] h-8 bg-accent-blue rounded-lg shadow-sm border-l-4 border-primary/40"></div>
+</div>
+</div>
+<!-- Zone 4 -->
+<div class="grid grid-cols-[160px_repeat(24,1fr)] border-b border-slate-50 dark:border-slate-800 h-16 gantt-grid">
+<div class="flex items-center px-4 border-r border-slate-100 dark:border-slate-800 bg-slate-50/30 dark:bg-slate-800/30">
+<span class="text-xs font-bold">Zone 4: Orchard</span>
+</div>
+<div class="col-span-24 relative flex items-center">
+<!-- Warning Bar -->
+<div class="absolute left-[45.8%] w-[12.5%] h-8 bg-red-100 border-2 border-red-500 border-dashed rounded-lg flex items-center justify-center px-2">
+<span class="text-[9px] font-bold text-red-600 truncate">REDUCED PRESSURE</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Flow Stats & Static Representation -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="lg:col-span-2 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm">
+<h3 class="font-bold mb-4">Water Allocation Flow</h3>
+<div class="relative h-48 flex items-center justify-center">
+<!-- Static Flow Lines -->
+<div class="absolute inset-0 flex items-center justify-center opacity-30 pointer-events-none">
+<svg fill="none" height="100%" viewbox="0 0 800 200" width="100%" xmlns="http://www.w3.org/2000/svg">
+<path d="M50 100C150 100 250 50 400 50S650 150 750 150" stroke="#4FC3F7" stroke-dasharray="10 5" stroke-width="2"></path>
+<path d="M50 120C150 120 250 170 400 170S650 70 750 70" stroke="#1c5f21" stroke-dasharray="5 5" stroke-width="1.5"></path>
+<circle cx="50" cy="110" fill="#4FC3F7" r="4"></circle>
+<circle cx="750" cy="110" fill="#1c5f21" r="4"></circle>
+</svg>
+</div>
+<div class="grid grid-cols-4 gap-4 w-full relative z-10">
+<div class="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl border border-slate-100 dark:border-slate-700">
+<p class="text-xs text-slate-500 font-bold uppercase">Main Pump</p>
+<p class="text-2xl font-black text-primary">850 <span class="text-xs font-normal">m³/h</span></p>
+<div class="mt-2 text-[10px] text-green-600 font-bold">● Operational</div>
+</div>
+<div class="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl border border-slate-100 dark:border-slate-700">
+<p class="text-xs text-slate-500 font-bold uppercase">Stored Volume</p>
+<p class="text-2xl font-black text-accent-blue">4.2k <span class="text-xs font-normal">m³</span></p>
+<div class="mt-2 text-[10px] text-slate-400">92% Capacity</div>
+</div>
+<div class="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl border border-slate-100 dark:border-slate-700">
+<p class="text-xs text-slate-500 font-bold uppercase">Leak Loss</p>
+<p class="text-2xl font-black text-red-500">1.2 <span class="text-xs font-normal">%</span></p>
+<div class="mt-2 text-[10px] text-red-500 font-bold">↑ Low Alert</div>
+</div>
+<div class="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl border border-slate-100 dark:border-slate-700">
+<p class="text-xs text-slate-500 font-bold uppercase">Avg Flow</p>
+<p class="text-2xl font-black text-slate-900 dark:text-white">12.4 <span class="text-xs font-normal">L/s</span></p>
+<div class="mt-2 text-[10px] text-slate-400">Normal Range</div>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm">
+<h3 class="font-bold mb-4">Quick Actions</h3>
+<div class="space-y-3">
+<button class="w-full flex items-center justify-between p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-primary hover:bg-primary/5 transition-all group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary">timer</span>
+<span class="text-sm font-semibold">Extend Current Cycle</span>
+</div>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+<button class="w-full flex items-center justify-between p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-primary hover:bg-primary/5 transition-all group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary">emergency_home</span>
+<span class="text-sm font-semibold">Emergency Shut-off</span>
+</div>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+<button class="w-full flex items-center justify-between p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-primary hover:bg-primary/5 transition-all group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary">auto_mode</span>
+<span class="text-sm font-semibold">Optimize via AI Soil Data</span>
+</div>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+<button class="w-full flex items-center justify-between p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-primary hover:bg-primary/5 transition-all group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary">settings_backup_restore</span>
+<span class="text-sm font-semibold">Reset to Default</span>
+</div>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</body></html>
